@@ -1,30 +1,79 @@
 import { HeroSection } from "./HeroSection";
 import FlowCards from "./FlowCards";
-import HiringSeams from "./HiringSeams";
-import ClosingVisionGapCard from "./CloseVissonGapCard";
-import AAAActionBanner from "./AAAActionBanner";
-import AlignmentBreaksDiagram from "./AlignmentBreaksDiagram";
-import StrategyGapSection from "./StrategyGapSection";
-import UniversalBehaviorSection from "./UniversalBehaviorSection";
-import AspirationToAchievementSection from "./AspirationToAchievementSection";
-import AAABehaviouralFramework from "./AAABehaviouralFramework";
-import AlignmentTabWithinAcrossComponent from "./AlignmentTabWithinAcrossComponent";
-import AlignmentIntelligence from "./AlignmentIntelligence";
-import AspireAlignAchieve from "@/components/common/Animation/triangleAnimation";
 import ECLoadingAnimation from "@/components/common/Animation/LoadingEcAnimation";
 import ContinuityBreaks from "./ContinuityBreaks";
 import StackedSections from "@/components/common/Animation/StackedSection";
 import { Roles } from "@/data/HomePageData";
-import AlignmentChallenge from "./AlignmentChallenge";
 import AlignmentContinuity from "./AlignmentContinuity";
 import AlignmentEngine from "./AlignmentEngine";
 import AlignmentActors from "./AlignmentActors";
 import AspirationAchievement from "./AspirationAchievement";
 import HiringAlignmentCTA from "./HiringAlignmentCTA";
+import AlignmentTabs from "./DemoHeroSection";
+import WithinContent from "./DemoBeignWithin";
 export const HomePage = () => {
+
+  const withinRoles = [
+  {
+    role: "Candidate",
+    img: "/images/candidate-avatar.png",
+    url: "/candidate",
+  },
+  {
+    role: "Recruiter",
+    img: "/images/recruiter-avatar.png",
+    url: "/recruiter",
+  },
+  {
+    role: "Employer",
+    img: "/images/employer-avatar.png",
+    url: "/employer",
+  },
+];
+
+const acrossRoles = [
+  {
+    role: "Candidate",
+    img: "/images/candidate-avatar.png",
+    url: "/candidate",
+  },
+  {
+    role: "Recruiter",
+    img: "/images/recruiter-avatar.png",
+    url: "/recruiter",
+  },
+  {
+    role: "Employer",
+    img: "/images/employer-avatar.png",
+    url: "/employer",
+  },
+];
+
+const mobileAcrossRoles = [
+  {
+    role: "Candidate",
+    img: "/images/candidate-avatar.png",
+    url: "/candidate",
+    type: "link" as const,
+  },
+  {
+    role: "Recruiter",
+    img: "/images/recruiter-avatar.png",
+    url: "/recruiter",
+    type: "link" as const,
+  },
+  {
+    role: "Employer",
+    img: "/images/employer-avatar.png",
+    url: "/employer",
+    type: "link" as const,
+  },
+];
+
   return (
     <>
       <main className="">
+      
         <div className=" relative bg-[url('/background/bg-hero-home-section.svg')] bg-no-repeat bg-cover bg-center">
           <HeroSection />
         </div>
@@ -34,6 +83,8 @@ export const HomePage = () => {
           <h2 className="mb-md font-extrabold text-h2">
              ONE HIRING CONTINUITY.
           </h2>
+
+          <div className="hidden md:flex">
          <StackedSections>
           
   {Roles.map((role) => (
@@ -43,9 +94,15 @@ export const HomePage = () => {
     />
   ))}
 </StackedSections>
-
-       
-
+</div>
+<div className="flex flex-col gap-md md:hidden">
+    {Roles.map((role) => (
+    <ContinuityBreaks
+      key={role.id}
+      role={role}
+    />
+  ))}
+</div>
         {/* <div className="mt-[5%] md:mt-0 py-[5%]">
           <AlignmentChallenge />
         </div> */}
@@ -55,6 +112,7 @@ export const HomePage = () => {
         <div className="mt-[5%] md:mt-0">
           <AlignmentEngine />
         </div>
+        
          <div className="py-[5%] -mx-[7%] md:-mx-0 overflow-x-hidden">
           <FlowCards />
           

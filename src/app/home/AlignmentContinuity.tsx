@@ -199,7 +199,7 @@ const cardTransition = {
 
 export default function AlignmentContinuity() {
   return (
-    <section className="w-full bg-white px-5 py-12 sm:px-8 lg:px-10 lg:py-16">
+    <section className="w-full bg-white">
       <div className="mx-auto ">
 
         {/* =========================================================
@@ -215,15 +215,15 @@ export default function AlignmentContinuity() {
 
           transition={cardTransition}
         >
-          <p className="text-[16px] font-bold uppercase tracking-[0.01em] text-[#0668E1] sm:text-[17px]">
+          <p className="text-h5 font-bold uppercase text-[#0668E1]">
             HOW ALIGNMENT PRESERVES CONTINUITY
           </p>
 
-          <h2 className="mt-2 text-[30px] font-extrabold leading-[1.08] tracking-[-0.035em] text-[#242424] sm:text-[36px] lg:text-[39px]">
+          <h2 className=" text-h2 font-extrabold">
             Within. Across. Actively Sustained.
           </h2>
 
-          <p className="mt-3 max-w-[1050px] text-[14px] font-medium leading-[1.5] text-[#292929] sm:text-[15px] lg:text-[16px]">
+          <p className=" text-base font-medium">
             Alignment is the structural condition that enables behavioural
             continuity to remain coherent through change.
           </p>
@@ -233,7 +233,7 @@ export default function AlignmentContinuity() {
             MAIN GRID
         ========================================================== */}
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-[1.42fr_1fr] lg:grid-rows-2">
+        <div className="mt-md grid gap-md lg:grid-cols-[1.42fr_1fr] lg:grid-rows-2">
 
           {/* =======================================================
               ALIGNMENT WITHIN
@@ -251,28 +251,67 @@ export default function AlignmentContinuity() {
               y: 0,
               transition: { duration: 0 },
             }}
-            className="group min-h-[126px] rounded-[14px] border border-[#D8E8FF] bg-white p-3 shadow-[0_8px_25px_rgba(30,100,180,0.05)] sm:p-4"
+            className="group min-h-[126px] rounded-md border border-[#D8E8FF] bg-white p-sm shadow-[0_8px_25px_rgba(30,100,180,0.05)] "
           >
-            <div className="flex h-full items-center gap-4">
+            <div className="flex flex-col md:flex-row h-full items-start gap-xs">
 
               {/* Icon */}
-              <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1] sm:h-[66px] sm:w-[66px]">
+              <div className="flex size-iconsize-lg shrink-0 items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1] ">
                 <WithinIcon />
               </div>
 
               {/* Content */}
               <div className="min-w-0">
-                <p className="text-[13px] font-extrabold uppercase tracking-[0.025em] text-[#0668E1]">
+                <p className="text-xl font-extrabold uppercase tracking-[0.025em] text-[#0668E1]">
                   ALIGNMENT WITHIN
                 </p>
 
-                <h3 className="mt-1.5 text-[18px] font-extrabold leading-tight tracking-[-0.015em] text-[#3A3A3A] sm:text-[19px]">
+                <h3 className="mt-xs text-h5 font-extrabold">
                   Head. Heart. Hand. In Harmony.
                 </h3>
 
-                <p className="mt-3 max-w-[520px] text-[13px] font-medium leading-[1.45] text-[#303030] sm:text-[14px]">
+                <p className="mt-3 text-xl font-medium ">
                   Understanding, intention, and action remain coherent as
                   conditions change.
+                </p>
+              </div>
+            </div>
+          </motion.article>
+
+          <motion.article
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              ...cardTransition,
+              delay: 0.12,
+            }}
+            whileHover={{
+              y: 0,
+              transition: { duration: 0.2 },
+            }}
+            className="md:hidden group md:min-h-[126px] rounded-md border border-[#D8E8FF] bg-white p-md shadow-[0_8px_25px_rgba(30,100,180,0.05)] "
+          >
+            <div className="flex flex-col md:flex-row h-full items-start gap-xs">
+
+              {/* Icon */}
+              <div className="flex size-iconsize-lg shrink-0 items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1]">
+                <AcrossIcon />
+              </div>
+
+              {/* Content */}
+              <div className="min-w-0">
+                <p className="text-xl font-extrabold uppercase text-[#0668E1]">
+                  ALIGNMENT ACROSS
+                </p>
+
+                <h3 className="text-base font-extrabold">
+                  Candidates. Recruiters. Employers. In Sync.
+                </h3>
+
+                <p className="mt-3 text-xl font-medium">
+                  Expectations, priorities, and actions remain coordinated
+                  across hiring interactions.
                 </p>
               </div>
             </div>
@@ -282,6 +321,7 @@ export default function AlignmentContinuity() {
               ALIGNMENT INTELLIGENCE
           ======================================================== */}
 
+
           <motion.article
             initial={{ opacity: 0, y: 0}}
             whileInView={{ opacity: 1, y: 0 }}
@@ -290,24 +330,24 @@ export default function AlignmentContinuity() {
               ...cardTransition,
               delay: 0.16,
             }}
-            className="row-span-2 flex min-h-[270px] flex-col items-center justify-center rounded-[14px] border border-[#D8E8FF] bg-white px-6 py-8 text-center shadow-[0_8px_25px_rgba(30,100,180,0.05)]"
+            className="row-span-2 flex  md:min-h-[270px] flex-col items-center justify-center rounded-md border border-[#D8E8FF] bg-white p-md text-center shadow-[0_8px_25px_rgba(30,100,180,0.05)]"
           >
             {/* Icon */}
-            <div className="flex h-[100px] w-[100px] items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1]">
+            <div className="flex size-iconsize-2xl items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1]">
               <IntelligenceIcon />
             </div>
 
-            <p className="mt-7 text-[13px] font-extrabold uppercase tracking-[0.025em] text-[#0668E1]">
+            <p className="mt-sm text-xl font-extrabold uppercase tracking-[0.025em] text-[#0668E1]">
               ALIGNMENT INTELLIGENCE
             </p>
 
-            <h3 className="mt-2 max-w-[340px] text-[17px] font-extrabold leading-[1.35] text-[#3A3A3A] sm:text-[18px]">
+            <h3 className="mt-2 text-h5 font-extrabold ">
               Alignment Within. Alignment Across.
               <br />
               Actively Sustained.
             </h3>
 
-            <p className="mt-4 max-w-[350px] text-[13px] font-medium leading-[1.45] text-[#3A3A3A] sm:text-[14px]">
+            <p className="mt-4 text-xl font-medium">
               Recognizes shifts in alignment, evaluates coherence, and enables
               timely adaptation before continuity breaks.
             </p>
@@ -329,26 +369,26 @@ export default function AlignmentContinuity() {
               y: 0,
               transition: { duration: 0.2 },
             }}
-            className="group min-h-[126px] rounded-[14px] border border-[#D8E8FF] bg-white p-3 shadow-[0_8px_25px_rgba(30,100,180,0.05)] sm:p-4"
+            className="hidden md:flex group md:min-h-[126px] rounded-md border border-[#D8E8FF] bg-white p-md shadow-[0_8px_25px_rgba(30,100,180,0.05)] "
           >
-            <div className="flex h-full items-center gap-4">
+            <div className="flex flex-col md:flex-row h-full items-start gap-xs">
 
               {/* Icon */}
-              <div className="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1] sm:h-[66px] sm:w-[66px]">
+              <div className="flex size-iconsize-lg shrink-0 items-center justify-center rounded-full bg-[#EEF6FF] text-[#0668E1]">
                 <AcrossIcon />
               </div>
 
               {/* Content */}
               <div className="min-w-0">
-                <p className="text-[13px] font-extrabold uppercase tracking-[0.025em] text-[#0668E1]">
+                <p className="text-xl font-extrabold uppercase text-[#0668E1]">
                   ALIGNMENT ACROSS
                 </p>
 
-                <h3 className="mt-1.5 text-[18px] font-extrabold leading-tight tracking-[-0.015em] text-[#3A3A3A] sm:text-[19px]">
+                <h3 className="text-base font-extrabold">
                   Candidates. Recruiters. Employers. In Sync.
                 </h3>
 
-                <p className="mt-3 max-w-[520px] text-[13px] font-medium leading-[1.45] text-[#303030] sm:text-[14px]">
+                <p className="mt-3 text-xl font-medium">
                   Expectations, priorities, and actions remain coordinated
                   across hiring interactions.
                 </p>
@@ -369,14 +409,14 @@ export default function AlignmentContinuity() {
             ...cardTransition,
             delay: 0.2,
           }}
-          className="mt-4 rounded-[14px] border border-[#A8D0FF] bg-[#EFF7FF] px-4 py-4 sm:px-5"
+          className="mt-md rounded-md border border-[#A8D0FF] bg-[#EFF7FF] p-sm"
         >
-          <p className="text-[13px] font-extrabold leading-[1.5] text-[#0668E1] sm:text-[14px]">
+          <p className="text-base font-extrabold text-[#0668E1]">
             Connect EC makes Alignment Within and Alignment Across visible and
             actionable.
           </p>
 
-          <p className="mt-1.5 text-[13px] font-semibold leading-[1.5] text-[#0668E1] sm:text-[14px]">
+          <p className="mt-xs text-base font-medium text-[#0668E1]">
             It reveals emerging drift early—enabling intervention before
             continuity breaks and hiring outcomes fail.
           </p>

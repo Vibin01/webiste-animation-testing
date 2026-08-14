@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import type { ReactNode } from "react";
+import React, { useRef, useState, type ReactNode } from "react";
 
 // ============================================================
 // TYPES
@@ -85,24 +85,51 @@ function TransitionCard({
   card: CardData;
 }) {
   return (
-    <article className="overflow-hidden rounded-[14px] border border-[#d8e6fa] bg-white">
+    <article
+      className="
+        flex
+        h-full
+        flex-col
+        overflow-hidden
+        rounded-lg
+        border
+        border-[#d8e6fa]
+        bg-white
+      "
+    >
+      {/* ==================================================
+          TOP VISUAL
+      ================================================== */}
 
-      {/* TOP VISUAL */}
+      <Image
+        alt=""
+        height={100}
+        width={100}
+        src="/home/candidate-application-interview.svg"
+        className="
+          block
+          w-full
+          shrink-0
+        "
+      />
 
-    <Image alt="image" height={100} width={100} src={"/home/candidate-application-interview.svg"}
-    className="w-full " />
+      {/* ==================================================
+          CONTENT
+      ================================================== */}
 
+      <div
+        className="
+          flex
+          flex-1
+          flex-col
+          border-t
+          border-[#e1e9f4]
+          p-md
+        "
+      >
+        {/* TITLE */}
 
-      {/* CONTENT */}
-
-      <div className="min-h-[238px] border-t border-[#e1e9f4] p-[12px]">
-
-        {/* ==================================================
-            TITLE
-        ================================================== */}
-
-        <h3 className="text-[15px] font-bold leading-[1.35] text-[#252525]">
-
+        <h3 className="text-base font-bold text-[#252525]">
           <span>
             {card.from.toUpperCase()}
           </span>
@@ -114,56 +141,54 @@ function TransitionCard({
           <span className="text-[#0668E1]">
             {card.to.toUpperCase()}
           </span>
-
         </h3>
 
+        {/* DESCRIPTION */}
 
-        {/* ==================================================
-            DESCRIPTION
-        ================================================== */}
-
-        <p className="mt-[7px] text-[13px] font-medium leading-[1.45] text-[#333]">
+        <p className="mt-sm text-xl font-medium text-[#333]">
           {card.description}
         </p>
 
+        {/* CONTINUITY BREAK */}
 
-        {/* ==================================================
-            CONTINUITY BREAK
-        ================================================== */}
-
-        <div className="mt-[13px] flex gap-[8px]">
-
+        <div className="mt-sm flex gap-xs">
           {/* Warning */}
 
           <AlertTriangle
             size={19}
-            className="mt-[1px] shrink-0 text-[#777]"
+            className="
+              mt-[1px]
+              size-iconsize-sm
+              shrink-0
+              text-[#777]
+            "
             strokeWidth={1.8}
           />
-
 
           {/* Text */}
 
           <div>
-
-            <h4 className="text-[14px] font-bold text-[#4b4b4b]">
+            <h4 className="text-xl font-bold text-[#4b4b4b]">
               {card.breakTitle}
             </h4>
 
-            <p className="mt-[5px] text-[13px] font-medium leading-[1.42] text-[#444]">
+            <p
+              className="
+                mt-[5px]
+                text-xl
+                font-medium
+                leading-[1.42]
+                text-[#444]
+              "
+            >
               {card.breakDescription}
             </p>
-
           </div>
-
         </div>
-
       </div>
-
     </article>
   );
 }
-
 
 // ============================================================
 // SUMMARY CARD
@@ -179,33 +204,51 @@ function SummaryCard({
   description?: string;
 }) {
   return (
-    <div className="flex min-h-[66px] items-center gap-[10px] rounded-[14px] border border-[#b9d5ff] bg-[#eff6ff] px-[12px]">
-
+    <div
+      className="
+        flex
+        h-full
+        w-full
+        items-start
+        gap-xs
+        rounded-md
+        border
+        border-[#b9d5ff]
+        bg-[#eff6ff]
+        p-sm
+      "
+    >
       {/* ICON */}
 
-      <div className="flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full bg-[#0668E1] text-white">
-
+      <div
+        className="
+          flex
+          size-iconsize-md
+          shrink-0
+          scale-90
+          items-center
+          justify-center
+          rounded-full
+          bg-[#0668E1]
+          text-white
+        "
+      >
         {icon}
-
       </div>
-
 
       {/* CONTENT */}
 
       <div>
-
-        <h4 className="text-[14px] font-bold leading-[1.3] text-[#0668E1]">
+        <h4 className="text-base font-bold text-[#0668E1]">
           {title}
         </h4>
 
         {description && (
-          <p className="mt-[2px] text-[12px] font-medium leading-[1.3] text-[#0668E1]">
+          <p className="mt-1 text-xl font-medium text-[#0668E1]">
             {description}
           </p>
         )}
-
       </div>
-
     </div>
   );
 }
@@ -215,109 +258,217 @@ function SummaryCard({
 // MAIN COMPONENT
 // ============================================================
 
+
 export default function ContinuityBreaks({
   role,
-
 }: ContinuityBreaksProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+
+    const container = scrollRef.current;
+
+    const itemWidth =
+      container.firstElementChild?.clientWidth ?? 0;
+
+    if (!itemWidth) return;
+
+    const index = Math.round(
+      container.scrollLeft / itemWidth
+    );
+
+    setActiveIndex(
+      Math.min(Math.max(index, 0), 2)
+    );
+  };
 
   return (
-    <section className="w-full h-[100vh] max-h-[100vh] bg-white p-[14px]">
-
+    <section className="w-full bg-white md:h-[110vh] md:max-h-[110vh]">
 
       {/* ====================================================
           HEADER
       ==================================================== */}
 
-      <div className="mb-[13px] flex items-center justify-between">
+      <div className="mb-md gap-md flex flex-col md:flex-row md:items-center justify-between">
 
+        <div className="flex items-center gap-xs">
 
-        {/* ==================================================
-            ROLE TITLE
-        ================================================== */}
+          <div className="h-btn-h w-2 rounded-full bg-[#0668E1]" />
 
-        <div className="flex items-center gap-[10px]">
-
-          {/* Blue vertical line */}
-
-          <div className="h-[38px] w-[4px] rounded-full bg-[#0668E1]" />
-
-
-          {/* Role */}
-
-          <h2 className="text-[28px] font-bold tracking-[-0.5px] text-[#0668E1]">
+          <h2 className="text-h2 font-extrabold text-[#0668E1]">
             {role.label}
           </h2>
 
         </div>
 
-
-        {/* ==================================================
-            STAGES
-        ================================================== */}
-
-        <div className="hidden items-center  sm:flex">
-
+        <div className="items-center flex flex-row">
           <StageButton label="Application" />
-
           <StageButton label="Interview" />
-
           <StageButton label="Offer" />
-
           <StageButton label="Joining" />
-
         </div>
 
       </div>
 
+   
+{/* ====================================================
+    MOBILE — HORIZONTAL SLIDES
+==================================================== */}
 
+{/* ====================================================
+    MOBILE — HORIZONTAL SLIDES
+==================================================== */}
+
+<div
+  ref={scrollRef}
+  onScroll={handleScroll}
+  className="
+    -mx-[5%]
+    grid
+    w-[110%]
+    grid-flow-col
+    grid-rows-[auto_auto]
+    auto-cols-[88%]
+    gap-md
+    overflow-x-auto
+    px-[5%]
+    pb-3
+    snap-x
+    snap-mandatory
+    overscroll-x-contain
+    scrollbar-none
+    md:hidden
+"
+>
+  {role.cards.map((card, index) => (
+    <React.Fragment key={`${role.id}-${index}`}>
+      
+      {/* ==================================================
+          TRANSITION CARD
+      ================================================== */}
+
+      <div
+        className="
+          row-start-1
+          flex
+          h-full
+          w-full
+          snap-center
+        "
+      >
+        <TransitionCard card={card} />
+      </div>
+
+
+      {/* ==================================================
+          SUMMARY CARD
+      ================================================== */}
+
+      <div
+        className="
+          row-start-2
+          flex
+          h-full
+          w-full
+        "
+      >
+        {index === 0 && (
+          <SummaryCard
+            icon={<Link2 size={15} />}
+            title="Continuity breaks within"
+            description="When decisions and actions separate."
+          />
+        )}
+
+        {index === 1 && (
+          <SummaryCard
+            icon={<ShieldCheck size={15} />}
+            title="Alignment Preserve both"
+          />
+        )}
+
+        {index === 2 && (
+          <SummaryCard
+            icon={<Network size={15} />}
+            title="Continuity breaks Across"
+            description="When change is not coordinated with others."
+          />
+        )}
+      </div>
+
+    </React.Fragment>
+  ))}
+</div>
       {/* ====================================================
-          THREE TRANSITION CARDS
+          MOBILE INDICATOR
       ==================================================== */}
 
-      <div className="grid grid-cols-1 gap-[12px] md:grid-cols-3">
+      <div className="mt-3 flex justify-center gap-2 md:hidden">
 
-        {role.cards.map((card, index) => (
+        {[0, 1, 2].map((index) => (
 
-          <TransitionCard
-            key={`${role.id}-${index}`}
-            card={card}
+          <span
+            key={index}
+            className={`
+              h-[6px]
+              rounded-full
+              transition-all
+              duration-300
+              ${
+                activeIndex === index
+                  ? "w-[22px] bg-[#0668E1]"
+                  : "w-[6px] bg-[#C9DCF5]"
+              }
+            `}
           />
 
         ))}
 
       </div>
 
-
       {/* ====================================================
-          BOTTOM SUMMARY
+          DESKTOP
       ==================================================== */}
 
-      <div className="mt-[12px] grid grid-cols-1 gap-[12px] md:grid-cols-3">
+      <div className="hidden md:block">
 
-        {/* WITHIN */}
+        {/* Transition cards */}
 
-        <SummaryCard
-          icon={<Link2 size={15} />}
-          title="Continuity breaks within"
-          description="When decisions and actions separate."
-        />
+        <div className="grid grid-cols-3 gap-md">
 
+          {role.cards.map((card, index) => (
+            <TransitionCard
+              key={`${role.id}-${index}`}
+              card={card}
+            />
+          ))}
 
-        {/* PRESERVE */}
+        </div>
 
-        <SummaryCard
-          icon={<ShieldCheck size={15} />}
-          title="Alignment Preserve both"
-        />
+        {/* Summary cards */}
 
+        <div className="mt-md grid grid-cols-3 gap-md">
 
-        {/* ACROSS */}
+          <SummaryCard
+            icon={<Link2 size={15} />}
+            title="Continuity breaks within"
+            description="When decisions and actions separate."
+          />
 
-        <SummaryCard
-          icon={<Network size={15} />}
-          title="Continuity breaks Across"
-          description="When change is not coordinated with others."
-        />
+          <SummaryCard
+            icon={<ShieldCheck size={15} />}
+            title="Alignment Preserve both"
+          />
+
+          <SummaryCard
+            icon={<Network size={15} />}
+            title="Continuity breaks Across"
+            description="When change is not coordinated with others."
+          />
+
+        </div>
 
       </div>
 
@@ -339,8 +490,12 @@ function StageButton({
     <div
       className={`
         relative
-        h-[48px]
-        w-[150px]
+        h-btn-h
+        /* Mobile */
+        -ml-[2px]
+
+        /* Desktop */
+        md:-ml-0
         shrink-0
       `}
     >
@@ -376,8 +531,9 @@ function StageButton({
           w-full
           items-center
           justify-center
-          px-6
-          text-[18px]
+          px-md
+          md:px-lg
+          text-xl
           font-medium
           text-[#0668E1]
         "
