@@ -95,7 +95,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <section className="flex items-center justify-center px-[5%] sm:px-0 pt-[5%] pb-[15%] md:pb-[10%]">
+    <section className="flex items-center justify-center px-[5%] sm:px-0 pt-[5%] pb-[4%]">
      <motion.div
         initial={{
           opacity: 0,
@@ -113,33 +113,34 @@ useEffect(() => {
         }}
         className="mt-[15%] flex w-full flex-col items-center justify-center text-center md:mt-[5%]"
       >
-        <h1 className="font-extrabold text-h1 text-[#0668E1]">
+        <h1 className="font-extrabold text-h5 text-[#0668E1]">
           Hiring Alignment{" "}
           <span className="inline-flex  gap-xs">
             System
             <img
               src={"/icons/tm-badge.svg"}
               alt="tm-badge"
-              className="size-iconsize-sm inline"
+              className="size-iconsize-sm inline scale-90"
             />
           </span>
         </h1>
 
-        <h2 className="font-extrabold text-h2 pb-lg">
-          Alignment Preserves Hiring Continuity.
+        <h2 className="font-extrabold text-h1 pb-lg">
+          Alignment Preserves
+          <br/><span className="text-[#0668E1]"> Hiring Continuity.</span>
         </h2>
 
-<div className="w-full">
+<div className="w-full mt-sm">
 
           <AlignmentTabs />
 
     
-        <h2 className="pb-sm text-h2 font-extrabold text-[#0668E1]   pt-sm">
+        <h2 className="pb-sm text-h5 font-extrabold text-[#0668E1]">
           <span className="inline-flex items-center gap-sm">
             <img
               src={"/icons/star-icon.svg"}
               alt="Star icon"
-              className="size-iconsize-lg inline animate-pulse"
+              className="size-iconsize-md inline animate-pulse"
             />
             Alignment Intelligence
           </span>
@@ -150,54 +151,4 @@ useEffect(() => {
   );
 };
 
-function RoleLabel({
-  role,
-}: {
-  role: string;
-}) {
-  return (
-    <div
-      className="
-        relative
-        mt-sm
-        flex
-        items-center
-        gap-xs
-        rounded-sm
-        border
-        border-transparent
-        bg-transparent
-        px-0
-        py-0
-        transition-all
-        duration-400
-        group-hover:border-[#0066FF]
-        group-hover:bg-white
-        group-hover:px-4
-        group-hover:py-2
-        group-hover:pr-xl
-      "
-    >
-      <span className="
-        font-medium
-        text-xl
-        group-hover:text-[#0066FF]
-      ">
-        {role}
-      </span>
 
-      <ArrowRight
-        className="
-          absolute
-          right-2
-          text-[#0066FF]
-          opacity-0
-          transition-all
-          duration-300
-          group-hover:scale-85
-          group-hover:opacity-100
-        "
-      />
-    </div>
-  );
-}

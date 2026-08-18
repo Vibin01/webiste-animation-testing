@@ -51,7 +51,7 @@ function WithinActor({
     const router=useRouter()
 
   return (
-    <div onClick={()=>router.push(role.url)} className="cursor-pointer relative flex h-[320px] w-full flex-col items-center">
+    <div onClick={()=>router.push(role.url)} className="cursor-pointer relative flex h-[200px] w-full flex-col items-center">
 
 <div
   className="
@@ -95,7 +95,7 @@ function WithinActor({
       ],
     }}
     transition={{
-        delay:0.8,
+        delay:1,
       duration: 3,
       times: [
         0,
@@ -144,7 +144,7 @@ function WithinActor({
       ],
     }}
     transition={{
-        delay:0.8,
+        delay:1,
       duration: 3,
       times: [
         0,
@@ -193,7 +193,7 @@ function WithinActor({
       ],
     }}
     transition={{
-       delay:0.8,
+       delay:1,
       duration: 3,
       times: [
         0,
@@ -276,51 +276,91 @@ function WithinActor({
   HHH
 </motion.div>
 {/* =====================================================
-    AVATAR FADES OUT
+    STEP 1
+    AVATAR + ROLE
+
+    0s     → Avatar appears
+    0.3s   → Role appears
+    0.8s   → Role fades/moves upward
+    1.0s   → Head / Heart / Hand starts
 ===================================================== */}
 
 <motion.div
   initial={{
-    opacity: 1,
-    scale: 1,
+    opacity: 0,
+    y: 30,
   }}
   animate={{
-    opacity: [1, 1, 0.7, 0],
-    scale: [1, 1, 0.92, 0.75],
+    opacity: 1,
+    y: 0,
   }}
   transition={{
-    duration: 1.8,
-    delay: 4.7,
-    times: [0, 0.25, 0.7, 1],
+    duration: 1,
+    delay: 0,
     ease,
   }}
   className="
-    pointer-events-none
     absolute
     left-1/2
     top-0
     z-20
     flex
-    size-[130px]
     -translate-x-1/2
+    flex-col
     items-center
-    justify-center
-    overflow-hidden
-    rounded-full
   "
 >
-  <img
-    src={role.img}
-    alt=""
+  {/* AVATAR */}
+
+  <div
     className="
-      h-full
-      w-full
-      object-cover
+      flex
+      size-[130px]
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-full
     "
-  />
+  >
+    <img
+      src={role.img}
+      alt={role.role}
+      className="
+        h-full
+        w-full
+        object-cover
+      "
+    />
+  </div>
+
+  {/* ROLE */}
+
+  <motion.span
+    initial={{
+      opacity: 0,
+      y: 15,
+    }}
+    animate={{
+      opacity: [0, 1, 1, 0],
+      y: [15, 0, 0, -25],
+    }}
+    transition={{
+      duration: 2,
+      times: [0, 0.9, 0.9, 1],
+      ease,
+    }}
+    className="
+      mt-3
+      whitespace-nowrap
+      text-h6
+      font-extrabold
+uppercase
+      text-[#303030]
+    "
+  >
+    {role.role}
+  </motion.span>
 </motion.div>
-
-
 {/* =====================================================
     FINAL CIRCLE
 
@@ -343,22 +383,35 @@ function WithinActor({
   }}
   className="
     pointer-events-none
-    absolute
+    
     left-1/2
     top-0
     z-40
     flex
     size-[130px]
-    -translate-x-1/2
     items-center
     justify-center
     rounded-full
     border-2
     border-[#0668E1]
-    bg-[#F2F7FF]
+    bg-white
+    
   "
 >
 
+<div
+  className="
+    absolute
+    left-1/2
+    top-1/2
+    size-[220px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    bg-[#0668E1]/5
+    blur-[30px]
+  "
+/>
 
   {/* =================================================
       IN HARMONY
@@ -381,6 +434,10 @@ function WithinActor({
     whitespace-nowrap
     text-center
   "
+style={{
+  backdropFilter: "blur(40px)",
+  WebkitBackdropFilter: "blur(200px)",
+}}
 >
   {/* ROLE + IN HARMONY */}
   <motion.div
@@ -393,29 +450,28 @@ function WithinActor({
       scale: [0.8, 1, 1, 0.8],
     }}
     transition={{
-      duration: 5,
-      delay: 5.2,
+      duration: 9,
+      delay: 5,
       times: [0, 0.2, 0.9, 1],
       ease,
     }}
     className="
-      absolute
       flex
       flex-col
       items-center
       text-center
-      text-xl
+      text-h5
       font-extrabold
       text-[#0668E1]
     "
   >
-    <span>{role.role}</span>
-    <span>In Harmony</span>
+    <span>Harmony</span>
   </motion.div>
 
 
 </div>
 </motion.div>
+
     </div>
   );
 }

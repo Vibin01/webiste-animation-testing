@@ -11,132 +11,69 @@ import AspirationAchievement from "./AspirationAchievement";
 import HiringAlignmentCTA from "./HiringAlignmentCTA";
 import AlignmentTabs from "./DemoHeroSection";
 import WithinContent from "./DemoBeignWithin";
+import HiringContinuity from "./HiringContinuity";
+import ActorCards from "./ActrosCard";
+import AlignmentSection from "./AlignmentSection";
 export const HomePage = () => {
-
-  const withinRoles = [
-  {
-    role: "Candidate",
-    img: "/images/candidate-avatar.png",
-    url: "/candidate",
-  },
-  {
-    role: "Recruiter",
-    img: "/images/recruiter-avatar.png",
-    url: "/recruiter",
-  },
-  {
-    role: "Employer",
-    img: "/images/employer-avatar.png",
-    url: "/employer",
-  },
-];
-
-const acrossRoles = [
-  {
-    role: "Candidate",
-    img: "/images/candidate-avatar.png",
-    url: "/candidate",
-  },
-  {
-    role: "Recruiter",
-    img: "/images/recruiter-avatar.png",
-    url: "/recruiter",
-  },
-  {
-    role: "Employer",
-    img: "/images/employer-avatar.png",
-    url: "/employer",
-  },
-];
-
-const mobileAcrossRoles = [
-  {
-    role: "Candidate",
-    img: "/images/candidate-avatar.png",
-    url: "/candidate",
-    type: "link" as const,
-  },
-  {
-    role: "Recruiter",
-    img: "/images/recruiter-avatar.png",
-    url: "/recruiter",
-    type: "link" as const,
-  },
-  {
-    role: "Employer",
-    img: "/images/employer-avatar.png",
-    url: "/employer",
-    type: "link" as const,
-  },
-];
 
   return (
     <>
-      <main className="">
-      
-        <div className=" relative bg-[url('/background/bg-hero-home-section.svg')] bg-no-repeat bg-cover bg-center">
+      <main className="px-[5%]">
+        <div className=" relative ">
           <HeroSection />
+          <ActorCards/>
         </div>
-        <div className="px-[5%] ">
-
-          <p className="font-bold text-h5">THREE ACTORS. THREE JOURNEYS.</p>
+        <div className=" ">
+          {/* <p className="font-bold text-h5">THREE ACTORS. THREE JOURNEYS.</p>
           <h2 className="mb-md font-extrabold text-h2">
-             ONE HIRING CONTINUITY.
+            ONE HIRING CONTINUITY.
           </h2>
 
           <div className="hidden md:flex">
-         <StackedSections>
-          
-  {Roles.map((role) => (
-    <ContinuityBreaks
-      key={role.id}
-      role={role}
-    />
-  ))}
-</StackedSections>
-</div>
-<div className="flex flex-col gap-md md:hidden">
-    {Roles.map((role) => (
-    <ContinuityBreaks
-      key={role.id}
-      role={role}
-    />
-  ))}
-</div>
-        {/* <div className="mt-[5%] md:mt-0 py-[5%]">
+            <StackedSections>
+              {Roles.map((role) => (
+                <ContinuityBreaks key={role.id} role={role} />
+              ))}
+            </StackedSections>
+          </div>
+          <div className="flex flex-col gap-md md:hidden">
+            {Roles.map((role) => (
+              <ContinuityBreaks key={role.id} role={role} />
+            ))}
+          </div> */}
+          {/* <div className="mt-[5%] md:mt-0 py-[5%]">
           <AlignmentChallenge />
         </div> */}
-        <div className="mt-[5%] md:mt-0 py-[5%]">
-          <AlignmentContinuity/>
-        </div>
-        <div className="mt-[5%] md:mt-0">
-          <AlignmentEngine />
-        </div>
-        
-         <div className="py-[5%] -mx-[7%] md:-mx-0 overflow-x-hidden">
-          <FlowCards />
-          
-        </div>
-        <div className="mt-[5%] md:mt-0 py-[5%]">
-          <AlignmentActors/>
-        </div>
+          <div className="mt-[5%] md:mt-0 py-[5%]">
+            <HiringContinuity/>
+          </div>
+          <div className="mt-[5%] md:mt-0">
+            <AlignmentSection/>
+          </div>
 
-        <div className="py-[5%]  ">
-          <AspirationAchievement/>
-        </div>
-        <div className="mt-[5%] md:mt-0 py-[5%]">
-         <HiringAlignmentCTA/>
-        </div>
-        {/* <div className="mt-[5%] md:mt-0 py-[5%]">
+          <div className="py-[5%] -mx-[7%] md:-mx-0 overflow-x-hidden">
+            <FlowCards />
+          </div>
+          <div className="mt-[5%] md:mt-0 py-[5%]">
+            <AlignmentActors />
+          </div>
+
+          <div className="py-[5%]  ">
+            <AspirationAchievement />
+          </div>
+          <div className="mt-[5%] md:mt-0 py-[5%]">
+            <HiringAlignmentCTA />
+          </div>
+          {/* <div className="mt-[5%] md:mt-0 py-[5%]">
           <AAAActionBanner />
         </div>
         <div className="mt-[5%] md:mt-0">
           <ClosingVisionGapCard />
         </div> */}
-        {/* <div>
+          {/* <div>
           <AlignmentCompoundsSection />
         </div> */}
-        {/* <div>
+          {/* <div>
           <AlignmentIntelligence/>
         </div>
         <div className="mt-[5%] md:mt-0 py-[5%] mb-[15%] md:mb-0">

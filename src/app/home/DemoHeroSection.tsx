@@ -410,6 +410,7 @@ export default function AlignmentTabs() {
             w-full
             max-w-[700px]
             grid-cols-2
+            mb-sm
           "
         >
 
@@ -471,6 +472,7 @@ export default function AlignmentTabs() {
           CONTENT
       ==================================================== */}
 
+<div className="px-[8%]">
 {activeTab === "within" ? (
   <>
   
@@ -479,6 +481,8 @@ export default function AlignmentTabs() {
 ) : (
   <DemoAcross/>
 )}
+</div>
+
 
     </section>
   );

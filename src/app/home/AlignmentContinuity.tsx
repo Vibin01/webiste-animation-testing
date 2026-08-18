@@ -215,7 +215,7 @@ export default function AlignmentContinuity() {
 
           transition={cardTransition}
         >
-          <p className="text-h5 font-bold uppercase text-[#0668E1]">
+          <p className="text-xl font-bold uppercase text-[#0668E1]">
             HOW ALIGNMENT PRESERVES CONTINUITY
           </p>
 
