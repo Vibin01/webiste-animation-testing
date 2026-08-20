@@ -1,5 +1,5 @@
 import React from "react";
-import HiringAlignmentBreakSection from "./HiringAlignmentBreakSection";
+import AlignmentHero from "./AlignmentHero";
 import AlignmentSituationsSection from "./AlignmentSituationSection";
 
 export const metadata = {
@@ -10,9 +10,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div className="px-[5%] mt-[5%]  md:mt-0">
-      <div className="py-[10%] md:py-[5%]">
-        <HiringAlignmentBreakSection />
+    <div className="px-[5%]  md:mt-0 overflow-x-hidden">
+      <div className="py-[10%] md:py-[1%]">
+        <AlignmentHero />
       </div>
       <div className="pt-[5%]">
         <AlignmentSituationsSection />

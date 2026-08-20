@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const withinRoles = [
+ 
   {
-    role: "Candidate",
-    img: "/icons/candidate-round-icon.svg",
+    role: "Employer",
+    img: "/icons/employer-round-icon.svg",
     url:"/resources/alignment-test/register?mode=single&phase=uncertainty"
   },
   {
@@ -14,9 +15,10 @@ const withinRoles = [
     img: "/icons/recruiters-round-icon.svg",
     url:"/resources/alignment-test/register?mode=single&phase=uncertainty"
   },
-  {
-    role: "Employer",
-    img: "/icons/employer-round-icon.svg",
+  
+   {
+    role: "Candidate",
+    img: "/icons/candidate-round-icon.svg",
     url:"/resources/alignment-test/register?mode=single&phase=uncertainty"
   },
 ];
@@ -25,7 +27,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function WithinAnimation() {
   return (
-    <section className="relative w-full overflow-hidden py-[3%]">
+    <section className="relative w-full overflow-hidden py-[2%]">
       <div className="grid w-full grid-cols-3 px-[10%] ">
         {withinRoles.map((role) => (
           <WithinActor
@@ -315,7 +317,7 @@ function WithinActor({
   <div
     className="
       flex
-      size-[130px]
+      size-[clamp(80px,calc(110_/_var(--width)*100vw),400px)]
       items-center
       justify-center
       overflow-hidden
@@ -371,9 +373,16 @@ uppercase
 <motion.div
   initial={{
     opacity: 0,
+     backgroundColor: "rgba(255, 255, 255, 0)",
   }}
   animate={{
     opacity: [0, 0, 1, 1],
+      backgroundColor: [
+      "rgba(255, 255, 255, 0)",
+      "rgba(255, 255, 255, 0.9)",
+      "rgba(255, 255, 255, 1)",
+      "rgba(255, 255, 255, 1)",
+    ],
   }}
   transition={{
     duration: 1.6,
@@ -388,13 +397,13 @@ uppercase
     top-0
     z-40
     flex
-    size-[130px]
+    size-[clamp(80px,calc(110_/_var(--width)*100vw),400px)]
     items-center
     justify-center
     rounded-full
     border-2
     border-[#0668E1]
-    bg-white
+    
     
   "
 >
@@ -404,7 +413,7 @@ uppercase
     absolute
     left-1/2
     top-1/2
-    size-[220px]
+    size-[clamp(120px,calc(200_/_var(--width)*100vw),300px)]
     -translate-x-1/2
     -translate-y-1/2
     rounded-full
@@ -434,10 +443,7 @@ uppercase
     whitespace-nowrap
     text-center
   "
-style={{
-  backdropFilter: "blur(40px)",
-  WebkitBackdropFilter: "blur(200px)",
-}}
+
 >
   {/* ROLE + IN HARMONY */}
   <motion.div

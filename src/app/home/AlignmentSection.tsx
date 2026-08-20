@@ -8,7 +8,7 @@ const alignmentCards = [
   {
     id: "within",
     type: "side",
-    icon: "/images/alignment-within.svg",
+    icon: "/home/icons/alignment-within-icon.svg",
     label: "Alignment Within",
     title: (
       <>
@@ -23,7 +23,7 @@ const alignmentCards = [
   {
     id: "intelligence",
     type: "center",
-    icon: "/images/alignment-intelligence.svg",
+    icon: "/home/icons/star-white-icon.svg",
     label: "Alignment Intelligence",
     title: (
       <>
@@ -38,7 +38,7 @@ const alignmentCards = [
   {
     id: "across",
     type: "side",
-    icon: "/images/alignment-across.svg",
+    icon: "/home/icons/alignment-across-icon.svg",
     label: "Alignment Across",
     title: (
       <>
@@ -53,7 +53,7 @@ const alignmentCards = [
 ];
 
   return (
-    <section className="min-h-screen bg-white px-[3%]">
+    <section className=" bg-white py-[5%]">
       <div className="mx-auto w-full ">
         {/* Header */}
         <div className="text-center">
@@ -80,7 +80,7 @@ const alignmentCards = [
         key={card.id}
         className={
           isCenter
-            ? "flex scale-105 flex-col items-center rounded-md bg-gradient-to-br from-[#087cff] via-[#006de7] to-[#0754a8] p-md text-center text-white shadow-[0_12px_28px_rgba(0,101,215,0.2)]"
+            ? "flex scale-105 flex-col items-center rounded-md bg-[linear-gradient(193.87deg,#0075FF_25.37%,#004BA6_81.69%)] p-md text-center text-white shadow-web-medium"
             : "flex  flex-col items-center justify-between rounded-md border border-[#DEEDFF] bg-white p-md text-center shadow-web-medium"
         }
       >
@@ -88,16 +88,17 @@ const alignmentCards = [
         <div
           className={
             isCenter
-              ? "mb-sm grid size-iconsize-2xl scale-110 place-items-center rounded-full border border-white/20 bg-[#0052b2]/20"
-              : "mb-sm grid size-iconsize-2xl  place-items-center rounded-full bg-[#edf5ff]"
+              ? "mb-sm grid p-sm scale-110 place-items-center rounded-full bg-[#0668E166]"
+              : "mb-sm grid p-sm  place-items-center rounded-full bg-[#edf5ff]"
           }
         >
           <Image
             src={card.icon}
             alt={card.label}
-            width={isCenter ? 53 : 58}
-            height={isCenter ? 53 : 58}
-            className="object-contain"
+            width={58}
+            height={58}
+            className={isCenter
+              ? "object-contain size-iconsize-xl":"object-contain size-iconsize-md"}
           />
         </div>
 

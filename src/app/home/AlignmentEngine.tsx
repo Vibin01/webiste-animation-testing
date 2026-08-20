@@ -1,472 +1,192 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
-import { useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-// ============================================================
-// TYPES
-// ============================================================
-
-type EngineCard = {
-  number: string;
-  label: string;
+type AlignmentItem = {
+  id: number;
   title: string;
   description: string;
   image: string;
 };
 
-// ============================================================
-// DATA
-// ============================================================
-
-const cards: EngineCard[] = [
+const alignmentData: AlignmentItem[] = [
   {
-    number: "01",
-    label: "ALIGNMENT TRIGGER",
-    title: "Makes the Decision Point Visible",
+    id: 1,
+    title: "Alignment Trigger",
     description:
       "Surfaces the decision required for an actor to continue, redirect, pause, or close the hiring flow on time.",
-    image: "/home/icons/alignment-trigger.svg",
+    image: "/home/alignment-trigger.svg",
   },
-
   {
-    number: "02",
-    label: "ALIGNMENT SIGNAL",
-    title: "Makes Follow-Through Visible",
+    id: 2,
+    title: "Alignment Signal",
     description:
-      "Shows whether an actor responds on time and whether the action that follows remains coherent with the communicated decision.",
-    image: "/home/icons/alignment-signal.svg",
+      "Identifies changes in alignment and makes emerging signals visible before they affect the hiring flow.",
+    image: "/home/alignment-signal.svg",
   },
-
   {
-    number: "03",
-    label: "ALIGNMENT SPECTRUM",
-    title: "Makes the Wider Pattern Visible",
+    id: 3,
+    title: "Alignment Spectrum",
     description:
-      "Brings signals from across hiring interactions together to reveal alignment patterns across the hiring ecosystem.",
-    image: "/home/icons/alignment-spectrum.svg",
+      "Shows the degree of alignment across the hiring journey, helping teams understand where action is required.",
+    image: "/home/alignment-spectrum.svg",
   },
 ];
 
-const easing = [0.22, 1, 0.36, 1] as const;
-
-// ============================================================
-// NUMBER MARKER
-// ============================================================
-
-function NumberMarker({
-  number,
-}: {
-  number: string;
-}) {
-  return (
-    <div className="relative flex h-[50px] w-[48px] shrink-0 items-center">
-      {/* Blue arc */}
-
-      <div
-        className="
-          absolute
-          left-0
-          top-0
-          h-[50px]
-          w-[50px]
-          rotate-[0deg]
-          rounded-full
-          border-[7px]
-          border-b-transparent
-          border-l-[#0668E1]
-          border-r-transparent
-          border-t-transparent
-        "
-      />
-
-      {/* Number */}
-
-      <div
-        className="
-          absolute
-          left-[10px]
-          top-[5px]
-          flex
-          h-[40px]
-          w-[40px]
-          items-center
-          justify-center
-          rounded-full
-          bg-white
-          text-[11px]
-          font-extrabold
-          text-[#0668E1]
-          shadow-[0_4px_12px_rgba(6,104,225,0.15)]
-        "
-      >
-        {number}
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-// ENGINE CARD
-// ============================================================
-
-function EngineCard({
-  card,
-  index,
-  scrollProgress,
-}: {
-  card: EngineCard;
-  index: number;
-  scrollProgress: MotionValue<number>;
-}) {
-  /*
-   * Each card owns one section of the scroll progress.
-   *
-   * Card 1: 0.00 → 0.30
-   * Card 2: 0.25 → 0.55
-   * Card 3: 0.50 → 0.80
-   *
-   * Once a card reaches its position it stays there.
-   */
-
-  const ranges = [
-    [0.00, 0.16, 0.30],
-    [0.25, 0.41, 0.55],
-    [0.50, 0.66, 0.80],
-  ];
-
-  const [start, enter, finish] = ranges[index];
-
-  // ----------------------------------------------------------
-  // CARD Y POSITION
-  // ----------------------------------------------------------
-
-  const y = useTransform(
-    scrollProgress,
-    [start, enter, finish],
-    [100, 0, 0]
-  );
-
-  // ----------------------------------------------------------
-  // OPACITY
-  // ----------------------------------------------------------
-
-  const opacity = useTransform(
-    scrollProgress,
-    [start, enter, finish],
-    [0, 1, 1]
-  );
-
-  // ----------------------------------------------------------
-  // SMALL SCALE
-  // ----------------------------------------------------------
-
-  const scale = useTransform(
-    scrollProgress,
-    [start, enter, finish],
-    [0.96, 1, 1]
-  );
-
-  return (
-    <motion.article
-      style={{
-        y,
-        opacity,
-        scale,
-      }}
-      className="
-        group
-        relative
-        overflow-hidden
-        rounded-[14px]
-        border
-        border-[#D8E8FF]
-        bg-white
-        p-3
-
-        shadow-[0_8px_28px_rgba(6,104,225,0.06)]
-
-        transition-[box-shadow,border-color]
-        duration-300
-
-        hover:border-[#9fc8ff]
-        hover:shadow-[0_16px_40px_rgba(6,104,225,0.14)]
-
-        sm:p-3.5
-      "
-    >
-      {/* ====================================================
-          IMAGE
-      ==================================================== */}
-
-      <div
-        className="
-          relative
-          aspect-[2.55/1]
-          w-full
-        "
-      >
-        <img
-          src={card.image}
-          alt=""
-         
-        
-        />
-
-      </div>
-
-      {/* ====================================================
-          CONTENT
-      ==================================================== */}
-
-      <div className="px-0.5 pb-1 pt-4 sm:pt-4.5">
-        <h3
-          className="
-            text-h5
-            font-bold
-          "
-        >
-          {card.title}
-        </h3>
-
-        <p
-          className="
-            mt-3
-            text-xl
-            font-medium
-          "
-        >
-          {card.description}
-        </p>
-      </div>
-    </motion.article>
-  );
-}
-
-// ============================================================
-// MAIN COMPONENT
-// ============================================================
-
 export default function AlignmentEngine() {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  /*
-   * IMPORTANT:
-   *
-   * The section is intentionally tall.
-   * The inner content becomes sticky.
-   *
-   * As the user scrolls through the 300vh section,
-   * scrollProgress moves from 0 → 1.
-   */
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const activeCard = alignmentData[activeIndex];
 
   return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="alignment-engine-title"
-      className="
-        relative
-        h-[320vh]
-        w-full
-        bg-white
-      "
-    >
-      {/* ====================================================
-          STICKY VIEWPORT
-      ==================================================== */}
+    <section className="w-full p-[5%]">
+      <div className="mx-auto grid grid-cols-1 gap-md md:grid-cols-[1.1fr_0.6fr_1fr] lg:items-center">
+        {/* =====================================================
+            LEFT CONTENT
+        ===================================================== */}
+        <div className="text-white">
+          <h2 className="text-h2 font-extrabold leading-tight">
+            The
+            <br />
+            Alignment
+            <br />
+            Engine
+          </h2>
 
-      <div
-        className="
-          sticky
-          top-0
-          flex
-          h-screen
-          w-full
-          items-start
-          overflow-hidden
-          bg-white
-          py-[2%]
+          <p className="mt-xs font-medium text-base text-white">
+            Connect EC’s proprietary Alignment
+            <br />
+            Architecture makes Alignment Intelligence
+            <br />
+            actionable through three connected
+            <br />
+            behavioural mechanisms.
+          </p>
+        </div>
 
+        {/* =====================================================
+            TABS
+        ===================================================== */}
+        <div className="flex flex-col gap-sm">
+          {alignmentData.map((item, index) => {
+            const isActive = activeIndex === index;
 
-        "
-      >
-        <div className="mx-auto w-full ">
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`
+                  group
+                  flex
+                  
+                  flex-col
+                  items-start
+                  justify-center
+                  rounded-md
+                  border
+                  p-sm
+                  text-left
+                  transition-all
+                  duration-300
+                  ${
+                    isActive
+                      ? "border-white bg-white text-[#0868D8]"
+                      : "border-white/80 bg-transparent text-white hover:bg-white/10"
+                  }
+                `}
+              >
+                {/* Number */}
+                <span
+                  className={`
+                    mb-xs
+                    flex
+                    size-iconsize-sm
+                    items-center
+                    justify-center
+                    rounded-[8px]
+                    text-md
+                    font-bold
+                    ${
+                      isActive
+                        ? "bg-[#0873E8] text-white"
+                        : "bg-transparent text-white"
+                    }
+                  `}
+                >
+                  {item.id}
+                </span>
 
-          {/* =================================================
-              HEADER
-          ================================================= */}
+                {/* Title */}
+                <span className="text-base font-bold">
+                  {item.title}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-          <motion.header
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.3,
-            }}
-            transition={{
-              duration: 0.7,
-              ease: easing,
-            }}
-          >
-            <h2
-              id="alignment-engine-title"
+        {/* =====================================================
+            ANIMATED CARD
+        ===================================================== */}
+        <div className="relative h-full overflow-hidden rounded-md">
+          <AnimatePresence mode="popLayout" custom={activeIndex}>
+            <motion.article
+              key={activeCard.id}
+              initial={{
+                y: activeIndex === 0 ? 30 : 80,
+                opacity: 0,
+              }}
+              animate={{
+                y: 0,
+                opacity: 1,
+              }}
+              exit={{
+                y: -80,
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.45,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="
-                text-h2
-                font-black
-                uppercase
+                absolute
+                inset-0
+                rounded-md
+                bg-white
+                flex
+    flex-col
+                p-md
               "
             >
-              The Alignment{" "}
-              <span className="text-[#0668E1]">
-                Engine
-              </span>
-            </h2>
+              {/* Image */}
+              <div className="relative   min-h-0 flex-1 overflow-hidden">
+                <Image
+                  src={activeCard.image}
+                  alt={activeCard.title}
+                  fill
+                  className="object-cover rounded-md"
+                />
+              </div>
 
-            <p
-              className="
-                text-base
-                
-                w-[90%]
-                font-medium
-              "
-            >
-              Connect EC’s proprietary Alignment Architecture
-              makes Alignment Intelligence actionable through
-              three connected behavioural mechanisms.
-            </p>
-          </motion.header>
+              {/* Content */}
+              <div className="shrink-0  mt-xs">
+                <h3 className="text-h6 font-bold">
+                  {activeCard.title === "Alignment Trigger"
+                    ? "Makes the Decision Point Visible"
+                    : activeCard.title}
+                </h3>
 
-          {/* =================================================
-              STAGE LABELS
-          ================================================= */}
-
-          <div
-            className="
-              mt-9
-              grid
-              grid-cols-1
-              gap-5
-
-              md:grid-cols-3
-              md:gap-4
-
-              lg:gap-[18px]
-            "
-          >
-            {cards.map((card, index) => (
-              <StageHeader
-                key={card.number}
-                card={card}
-                index={index}
-                scrollProgress={scrollYProgress}
-              />
-            ))}
-          </div>
-
-          {/* =================================================
-              CARDS
-          ================================================= */}
-
-          <div
-            className="
-              mt-md
-              grid
-              grid-cols-1
-
-              md:grid-cols-3
-              gap-md
-
-            "
-          >
-            {cards.map((card, index) => (
-              <EngineCard
-                key={card.number}
-                card={card}
-                index={index}
-                scrollProgress={scrollYProgress}
-              />
-            ))}
-          </div>
-
+                <p className="mt-1 text-xl font-medium">
+                  {activeCard.description}
+                </p>
+              </div>
+            </motion.article>
+          </AnimatePresence>
         </div>
       </div>
     </section>
-  );
-}
-
-// ============================================================
-// STAGE HEADER
-// ============================================================
-
-function StageHeader({
-  card,
-  index,
-  scrollProgress,
-}: {
-  card: EngineCard;
-  index: number;
-  scrollProgress: MotionValue<number>;
-}) {
-  const ranges = [
-    [0.00, 0.16, 0.30],
-    [0.25, 0.41, 0.55],
-    [0.50, 0.66, 0.80],
-  ];
-
-  const [start, enter, finish] = ranges[index];
-
-  const opacity = useTransform(
-    scrollProgress,
-    [start, enter, finish],
-    [0, 1, 1]
-  );
-
-  const x = useTransform(
-    scrollProgress,
-    [start, enter, finish],
-    [-25, 0, 0]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        x,
-      }}
-      className="flex items-center gap-3"
-    >
-      <NumberMarker number={card.number} />
-
-      <span
-        className="
-          text-[13px]
-          font-extrabold
-          uppercase
-          tracking-[0.025em]
-          text-[#0668E1]
-
-          sm:text-[14px]
-        "
-      >
-        {card.label} 
-      </span>
-    </motion.div>
   );
 }

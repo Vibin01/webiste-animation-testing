@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const withinRoles = [
-  {
-    role: "Candidate",
-    img: "/icons/candidate-round-icon.svg",
+   {
+    role: "Employer",
+    img: "/icons/employer-round-icon.svg",
     url:"https://employer.connectec.app/login"
   },
   {
@@ -16,16 +16,17 @@ const withinRoles = [
     img: "/icons/recruiters-round-icon.svg",
     url:"https://employer.connectec.app/login"
   },
-  {
-    role: "Employer",
-    img: "/icons/employer-round-icon.svg",
+
+   {
+    role: "Candidate",
+    img: "/icons/candidate-round-icon.svg",
     url:"https://employer.connectec.app/login"
   },
 ];
 
 export const DemoAcross = () => {
   return (
-    <section className="relative w-full overflow-hidden py-[3%]">
+    <section className="relative w-full overflow-hidden py-[2%]">
       <div className="grid w-full grid-cols-3 px-[10%]">
         {withinRoles.map((role, index) => (
           <WithinActor
@@ -72,7 +73,7 @@ function WithinActor({
       left-[calc(50%+75px)]
       top-0
       z-20
-      h-[130px]
+      h-[clamp(80px,calc(110_/_var(--width)*100vw),400px)]
       w-[calc(100%-150px)]
     "
   >
@@ -90,7 +91,7 @@ function WithinActor({
       -left-[5%]
       -right-[5%]
       top-0
-      h-[130px]
+      h-[clamp(80px,calc(110_/_var(--width)*100vw),400px)]
       overflow-hidden
       z-20
     "
@@ -233,7 +234,7 @@ function WithinActor({
           top-0
           z-40
           flex
-          size-[130px]
+          size-[clamp(80px,calc(110_/_var(--width)*100vw),400px)]
           -translate-x-1/2
           items-center
           justify-center
@@ -250,7 +251,7 @@ function WithinActor({
     absolute
     left-1/2
     top-1/2
-    size-[220px]
+    size-[clamp(120px,calc(200_/_var(--width)*100vw),300px)]
     -translate-x-1/2
     -translate-y-1/3
     rounded-full

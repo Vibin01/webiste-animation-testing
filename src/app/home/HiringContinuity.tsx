@@ -1,22 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import {
-  BriefcaseBusiness,
-  Users,
-  UserRound,
-  Link2,
-  Network,
-  Sparkles,
-  ArrowRight,
-} from "lucide-react";
+
+import Image from "next/image";
 
 type Role = "employer" | "recruiter" | "candidate";
 
 type ContinuityCard = {
   title: string;
   description: string;
-  icon: "employer" | "recruiter" | "candidate";
+  icon: string;
   breakTitle: string;
   breakDescription: string;
 };
@@ -31,6 +24,7 @@ type RoleData = {
 
   bottomCards: {
     type: "within" | "preserve" | "across";
+    icon:string;
     title: string;
     description: string;
   }[];
@@ -54,7 +48,7 @@ const roleData: Record<Role, RoleData> = {
         description:
           "The employer moves from defining hiring targets to aligning priorities and capacity for candidate evaluation.",
 
-        icon: "employer",
+        icon: "/home/icons/video-link-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
@@ -67,7 +61,7 @@ const roleData: Record<Role, RoleData> = {
         description:
           "The employer moves from evaluating candidates to selecting the right talent through consistent standards.",
 
-        icon: "recruiter",
+        icon: "/home/icons/bussness-bag-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
@@ -80,7 +74,7 @@ const roleData: Record<Role, RoleData> = {
         description:
           "The employer moves from selecting a candidate to securing the hire through joining.",
 
-        icon: "candidate",
+        icon: "/home/icons/handshake-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
@@ -91,17 +85,21 @@ const roleData: Record<Role, RoleData> = {
 
     bottomCards: [
       {
-        type: "within",
+        type:"within",
+        icon: "/home/icons/broken-link-icon.svg",
         title: "Continuity breaks within",
         description: "When decisions and actions separate.",
       },
       {
-        type: "preserve",
+        type:"preserve",
+        icon: "/home/icons/star-icon.svg",
         title: "Alignment Preserve both",
         description: "When coherence is sustained.",
       },
+
       {
-        type: "across",
+        type:"across",
+        icon: "/home/icons/department-line-icon.svg",
         title: "Continuity breaks Across",
         description: "When coordination breaks.",
       },
@@ -114,65 +112,68 @@ const roleData: Record<Role, RoleData> = {
 
     stages: [
       "Sourcing",
+      "Scheduling",
       "Evaluation",
-      "Selection",
-      "Hiring",
+      "Closure",
     ],
 
     cards: [
       {
-        title: "SOURCING → EVALUATION",
+        title: "SOURCING → SCHEDULING",
         description:
-          "The recruiter moves from sourcing candidates to evaluating them against consistent hiring requirements.",
+          "The recruiter moves from identifying a candidate to coordinating and confirming an interview.",
 
-        icon: "recruiter",
+        icon: "/home/icons/video-link-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Candidates are sourced, but inconsistent requirements and fragmented information can create gaps before evaluation begins.",
+          "The recruiter identifies the candidate, but changing availability, reschedules, and scattered communication delay interview confirmation.",
       },
 
       {
-        title: "EVALUATION → SELECTION",
+        title: "SCHEDULING → EVALUATION",
         description:
-          "The recruiter moves from evaluating candidates to recommending the right candidate for selection.",
+          "The recruiter moves from scheduling the interview to securing reliable participation and completing the evaluation.",
 
-        icon: "employer",
+        icon: "/home/icons/bussness-bag-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Evaluation decisions can become inconsistent when feedback, expectations, and hiring criteria are not aligned.",
+          "The interview is scheduled, but last-minute withdrawals, candidate no-shows, and delayed panel feedback prevent a reliable transition to evaluation.",
       },
 
       {
-        title: "SELECTION → HIRING",
+        title: "EVALUATION → CLOSURE",
         description:
-          "The recruiter moves from candidate selection to supporting a successful offer and joining process.",
+          "The recruiter moves from evaluation to communicating the decision and sustaining commitment through joining.",
 
-        icon: "candidate",
+        icon: "/home/icons/handshake-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Candidate commitment can weaken when post-selection communication and expectations are disconnected.",
+          "Evaluation is completed, but delayed decision communication, weak post-offer engagement, and changing candidate intent put joining at risk.",
       },
     ],
 
     bottomCards: [
       {
-        type: "within",
+        type:"within",
+        icon: "/home/icons/broken-link-icon.svg",
         title: "Continuity breaks within",
         description: "When decisions and actions separate.",
       },
       {
-        type: "preserve",
+        type:"preserve",
+        icon: "/home/icons/star-icon.svg",
         title: "Alignment Preserve both",
         description: "When coherence is sustained.",
       },
       {
-        type: "across",
+        type:"across",
+        icon: "/home/icons/department-line-icon.svg",
         title: "Continuity breaks Across",
         description: "When coordination breaks.",
       },
@@ -184,66 +185,69 @@ const roleData: Record<Role, RoleData> = {
     icon: "candidate",
 
     stages: [
-      "Interest",
-      "Evaluation",
-      "Selection",
+      "Application",
+      "Interview",
+      "Offer",
       "Joining",
     ],
 
     cards: [
       {
-        title: "INTEREST → EVALUATION",
+        title: "APPLICATION → INTERVIEW",
         description:
-          "The candidate moves from showing interest to understanding and engaging with the evaluation process.",
+          "The candidate moves from applying for a role to confirming and preparing for an interview.",
 
-        icon: "candidate",
+        icon: "/home/icons/video-link-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Candidate expectations may not remain connected to the evaluation experience, creating uncertainty and disengagement.",
+          "The candidate applies for the role, but delayed responses, scheduling changes, and scattered communication prevent the candidate from confirming and preparing for the interview.",
       },
 
       {
-        title: "EVALUATION → SELECTION",
+        title: "INTERVIEW → OFFER",
         description:
-          "The candidate moves from evaluation to understanding the selection decision and next steps.",
+          "The candidate moves from completing the interview to understanding the hiring outcome and next steps.",
 
-        icon: "recruiter",
+        icon: "/home/icons/bussness-bag-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Unclear feedback and inconsistent communication can weaken candidate confidence during selection.",
+          "The interview is completed, but delayed feedback, unclear decision status, and inconsistent communication leave the candidate uncertain about the outcome and what follows.",
       },
 
       {
-        title: "SELECTION → JOINING",
+        title: "OFFER → JOINING",
         description:
-          "The candidate moves from selection to committing and successfully joining the organization.",
+          "The candidate moves from receiving an offer to evaluating it, communicating a decision, and progressing toward joining.",
 
-        icon: "employer",
+        icon: "/home/icons/handshake-break-icon.svg",
 
         breakTitle: "Continuity Break",
 
         breakDescription:
-          "Changing expectations, weak engagement, and disconnected communication can put the joining decision at risk.",
+          "The offer is received, but limited evaluation time, decision pressure, and weak post-offer engagement put the candidate’s offer decision and joining commitment at risk.",
       },
     ],
 
     bottomCards: [
       {
-        type: "within",
+        type:"within",
+        icon: "/home/icons/broken-link-icon.svg",
         title: "Continuity breaks within",
         description: "When decisions and actions separate.",
       },
       {
-        type: "preserve",
+        type:"preserve",
+        icon: "/home/icons/star-icon.svg",
         title: "Alignment Preserve both",
         description: "When coherence is sustained.",
       },
       {
-        type: "across",
+        type:"across",
+        icon: "/home/icons/department-line-icon.svg",
         title: "Continuity breaks Across",
         description: "When coordination breaks.",
       },
@@ -251,39 +255,9 @@ const roleData: Record<Role, RoleData> = {
   },
 };
 
-function RoleIcon({
-  type,
-  className = "",
-}: {
-  type: "employer" | "recruiter" | "candidate";
-  className?: string;
-}) {
-  if (type === "employer") {
-    return <BriefcaseBusiness className={className} />;
-  }
 
-  if (type === "recruiter") {
-    return <Users className={className} />;
-  }
 
-  return <UserRound className={className} />;
-}
 
-function BottomIcon({
-  type,
-}: {
-  type: "within" | "preserve" | "across";
-}) {
-  if (type === "within") {
-    return <Link2 className="h-4 w-4" />;
-  }
-
-  if (type === "across") {
-    return <Network className="h-4 w-4" />;
-  }
-
-  return <Sparkles className="h-4 w-4" />;
-}
 
 export default function HiringContinuity() {
   const [activeRole, setActiveRole] = useState<Role>("employer");
@@ -490,12 +464,13 @@ s            "
                       rounded-full
                       ${
                         preserve
-                          ? "bg-white/15 text-white"
-                          : "bg-[#EEF5FF] text-[#0668E1]"
+                          ? "bg-white"
+                          : "bg-[#DEEDFF]"
                       }
                     `}
                   >
-                    <BottomIcon type={card.type} />
+                    <Image src={card.icon} alt={card.title} height={100} width={100}
+                    className="size-iconsize-sm" />
                   </div>
 <div>
     <span className="text-base font-bold">
@@ -582,9 +557,12 @@ function ContinuityCard({
       >
         {/* ICON */}
 
-        <div className="mb-xs text-[#F04438]">
-          <RoleIcon
-            type={card.icon}
+        <div className="mb-xs">
+          <Image
+          src={card.icon}
+          alt={card.title}
+height={100}
+width={100}
             className="size-iconsize-sm"
           />
         </div>

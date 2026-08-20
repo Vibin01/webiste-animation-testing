@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa6";
 
 // ============================================================
 // TYPES
@@ -23,16 +24,16 @@ type Actor = {
 
 const actors: Actor[] = [
   {
-    id: "candidate",
-    role: "Candidate",
-    title: "Career Progress, Aligned",
-    keywords: "Coordinate · Prepare · Learn · Decide",
+    id: "employer",
+    role: "Employer",
+    title: "Hiring Strategy, Aligned",
+    keywords:
+      "Calibrate · Diagnose · Standardize · Protect",
     description:
-      "Keep interviews, verified employer insights, feedback, and offer decisions connected across opportunities.",
-    buttonText: "Explore Candidate Alignment",
-    avatar: "/icons/candidate-round-icon.svg",
+      "Keep targets, execution signals, evaluations, and hiring transitions connected as business and market conditions change.",
+    buttonText: "Explore Employer Alignment",
+    avatar: "/icons/employer-round-icon.svg",
   },
-
   {
     id: "recruiter",
     role: "Recruiter",
@@ -44,18 +45,18 @@ const actors: Actor[] = [
     buttonText: "Explore Recruiter Alignment",
     avatar: "/icons/recruiters-round-icon.svg",
   },
-
-  {
-    id: "employer",
-    role: "Employer",
-    title: "Hiring Strategy, Aligned",
-    keywords:
-      "Calibrate · Diagnose · Standardize · Protect",
+{
+    id: "candidate",
+    role: "Candidate",
+    title: "Career Progress, Aligned",
+    keywords: "Coordinate · Prepare · Learn · Decide",
     description:
-      "Keep targets, execution signals, evaluations, and hiring transitions connected as business and market conditions change.",
-    buttonText: "Explore Employer Alignment",
-    avatar: "/icons/employer-round-icon.svg",
+      "Keep interviews, verified employer insights, feedback, and offer decisions connected across opportunities.",
+    buttonText: "Explore Candidate Alignment",
+    avatar: "/icons/candidate-round-icon.svg",
   },
+
+  
 ];
 
 // ============================================================
@@ -64,7 +65,7 @@ const actors: Actor[] = [
 
 export default function AlignmentActors() {
   return (
-    <section className="w-full bg-white py-10">
+    <section className="w-full bg-white pb-[10%] ">
 
       <div className="mx-auto w-full">
 
@@ -348,11 +349,11 @@ function AlignmentCard({
         ease: [0.22, 1, 0.36, 1],
       }}
       className="
-        group
+        
         relative
         min-h-[260px]
         overflow-hidden
-        rounded-[12px]
+        rounded-md
 mt-lg
 mx-1
         border
@@ -430,7 +431,9 @@ mx-1
             className="
               text-h6
               font-bold
-              text-[#0668E1]
+              
+              w-[60%]
+              text-center
             "
           >
             {actor.title}
@@ -441,7 +444,8 @@ mx-1
 
           <p
             className="
-              
+            mt-xs
+              text-[#0668E1]
               text-xl
               font-bold
             "
@@ -454,7 +458,7 @@ mx-1
 
           <p
             className="
-              mt-md
+              mt-sm
               text-xl
               font-medium
               text-center
@@ -472,86 +476,101 @@ mx-1
 
         <div className="mt-auto pt-lg">
 
-          <motion.button
-      type="button"
+<motion.div
+  className="
+  group
+    relative
+    flex
+    h-btn-h
+    bg-transparent
+    border-2
+    border-[#FFFFFF]
+    cursor-pointer
+    rounded-md
+    items-center
+    justify-center
+    shadow-web-mini
+    overflow-hidden
+    pl-sm
+  "
+  initial="rest"
+  whileHover="hover"
+  variants={{
+    rest: {
+      borderColor: "#0668E1",
+    },
+    hover: {
+      borderColor: "#0668E1",
+    },
+  }}
+  transition={{
+    borderColor: {
+      duration: 2,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }}
+>
+  {/* Blue background */}
+  <motion.div
+    className="
+      absolute
+      inset-0
+      bg-[#0668E1]
+      z-0
+      origin-left
+    "
+    variants={{
+      rest: {
+        scaleX: 0,
+      },
+      hover: {
+        scaleX: 1,
+      },
+    }}
+    transition={{
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+  />
+
+  {/* Content */}
+  <motion.div
+    className="
+      relative
+      z-10
+      flex
+      items-center
+      justify-center
+      gap-sm
+    "
+  >
+    {/* Text */}
+    <span className="font-bold text-xl text-primary group-hover:text-white">
+       {actor.buttonText}
+    </span>
+
+    {/* Arrow */}
+    <motion.div
       variants={{
-        rest: {},
-        hover: {},
+        rest: {
+          opacity: 0,
+          x: -10,
+        },
+        hover: {
+          opacity: 1,
+          x: 0,
+        },
       }}
-      className="
-        group-hover:border-[#0668E1]
-        group-hover:border
-        border
-        border-[#DEEDFF]
-        relative
-        flex
-        h-btn-h
-        w-full
-        items-center
-        justify-center
-        
-        overflow-hidden
-        rounded-[12px]
-        bg-white
-        text-xl
-        font-bold
-      "
+      transition={{
+        duration: 0.4,
+        delay: 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
- 
-
-
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
-
-      <motion.span
-        variants={{
-          rest: {
-            color: "#222",
-          },
-
-          hover: {
-            color: "#0668E1",
-          },
-        }}
-        transition={{
-          duration: 0.25,
-        }}
-        className="
-          relative
-          z-10
-          flex
-          items-center
-          justify-center
-          gap-sm
-        "
-      >
-        <span>
-          {actor.buttonText}
-        </span>
-
-        <motion.span
-          variants={{
-            rest: {
-              x: 0,
-            },
-
-            hover: {
-              x: 3,
-            },
-          }}
-          transition={{
-            duration: 0.3,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          <ArrowRight
-            size={17}
-            strokeWidth={1.8}
-          />
-        </motion.span>
-      </motion.span>
-    </motion.button>
+      <FaArrowRight className="text-white size-iconsize-sm scale-90" />
+    </motion.div>
+  </motion.div>
+</motion.div>
 
         </div>
 

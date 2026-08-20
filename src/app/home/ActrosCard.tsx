@@ -30,7 +30,6 @@ export default function ActorCards() {
           <div
             key={actor.role}
             className="
-              group
               relative
               flex
               
@@ -114,8 +113,10 @@ export default function ActorCards() {
               {/* BEGIN WITHIN */}
 
               <button
+              
                 type="button"
                 className="
+                group
                   flex
                   h-btn-h
                   w-full
@@ -157,6 +158,7 @@ export default function ActorCards() {
               <button
                 type="button"
                 className="
+                group
                   flex
                   h-btn-h
                   w-full
@@ -179,8 +181,7 @@ export default function ActorCards() {
 
                 <ArrowRight
                   className="
-                    h-7
-                    w-7
+                   size-iconsize-sm
                     opacity-0
                     -translate-x-2
                     transition-all

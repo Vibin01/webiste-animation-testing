@@ -13,67 +13,6 @@ import { ShowDesktopWarning } from "@/components/common/Toast/ShowDesktopWarning
 import { motion } from "framer-motion";
 import AlignmentTabs from "./DemoHeroSection";
 
-const withinRoles = [
-  {
-    role: "Candidates",
-    roleId: "candidate",
-    img: "/icons/candidate-icon.svg",
-    // url: "/resources/alignment-test/register?mode=single&phase=uncertainty&role=candidate",
-    url: "/resources/alignment-test/register?mode=single&phase=uncertainty",
-  },
-  {
-    role: "Recruiters",
-    roleId: "recruiter",
-    img: "/icons/recruiter-icon.svg",
-    // url: "/resources/alignment-test/register?mode=single&phase=uncertainty&role=recruiter",
-    url: "/resources/alignment-test/register?mode=single&phase=uncertainty",
-  },
-  {
-    role: "Employers",
-    roleId: "employer",
-    img: "/icons/employer-icon.svg",
-    // url: "/resources/alignment-test/register?mode=single&phase=uncertainty&role=employer",
-    url: "/resources/alignment-test/register?mode=single&phase=uncertainty",
-  },
-];
-const acrossRoles = [
-  {
-    role: "Candidates",
-    img: "/icons/candidate-icon.svg",
-    url: "https://play.google.com/store/apps/details?id=com.primethic.connectec",
-  },
-  {
-    role: "Recruiters",
-    img: "/icons/recruiter-icon.svg",
-    url: "https://recruiter.connectec.app/register",
-  },
-  {
-    role: "Employers",
-    img: "/icons/employer-icon.svg",
-    url: "https://employer.connectec.app/register",
-  },
-];
-const mobileAcrossRoles = [
-  {
-    role: "Candidates",
-    img: "/icons/candidate-icon.svg",
-    url: "https://play.google.com/store/apps/details?id=com.primethic.connectec",
-    type: "link",
-  },
-  {
-    role: "Recruiters",
-    img: "/icons/recruiter-icon.svg",
-    url: "https://play.google.com/store/apps/details?id=com.primethic.connectec",
-    type: "link",
-  },
-  {
-    role: "Employers",
-    img: "/icons/employer-icon.svg",
-    url:"",
-    type: "toast",
-  },
-];
-
 
 export const HeroSection = () => {
 
@@ -95,7 +34,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <section className="flex items-center justify-center px-[5%] sm:px-0 pt-[5%] pb-[4%]">
+    <section className="flex items-center justify-center px-[5%] sm:px-0 pt-[3%] pb-[4%]">
      <motion.div
         initial={{
           opacity: 0,
@@ -113,7 +52,7 @@ useEffect(() => {
         }}
         className="mt-[15%] flex w-full flex-col items-center justify-center text-center md:mt-[5%]"
       >
-        <h1 className="font-extrabold text-h5 text-[#0668E1]">
+        <p className="font-extrabold text-h5 text-[#0668E1]">
           Hiring Alignment{" "}
           <span className="inline-flex  gap-xs">
             System
@@ -123,28 +62,28 @@ useEffect(() => {
               className="size-iconsize-sm inline scale-90"
             />
           </span>
-        </h1>
+        </p>
 
-        <h2 className="font-extrabold text-h1 pb-lg">
+        <h1 className="font-extrabold text-h1 pb-lg leading-tight">
           Alignment Preserves
           <br/><span className="text-[#0668E1]"> Hiring Continuity.</span>
-        </h2>
+        </h1>
 
-<div className="w-full mt-sm">
+<div className="w-full">
 
           <AlignmentTabs />
 
     
-        <h2 className="pb-sm text-h5 font-extrabold text-[#0668E1]">
+        <h3 className="pb-sm text-h5 font-extrabold text-[#0668E1]">
           <span className="inline-flex items-center gap-sm">
             <img
               src={"/icons/star-icon.svg"}
               alt="Star icon"
               className="size-iconsize-md inline animate-pulse"
             />
-            Alignment Intelligence
+             Powered by Alignment Intelligence
           </span>
-        </h2>
+        </h3>
       </div>
       </motion.div>
     </section>
